@@ -4,17 +4,17 @@ import {LayoutComponent} from "./layout/layout.component";
 
 const routes: Routes = [
   {
-    path: 'articles',
+    path: '',
     component: LayoutComponent,
     children: [
       {
-        path: '',
+        path: 'articles',
         loadChildren: () =>
           import('./articles/articles.module').then((m) => m.ArticlesModule),
       },
       {
         path: '',
-        redirectTo: '',
+        redirectTo: '/articles/list',
         pathMatch: 'full',
       },
       {
