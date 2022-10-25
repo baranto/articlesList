@@ -3,6 +3,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { AppComponent } from './app.component';
 import {AppRoutingModule} from "./app-routing.module";
 import {HttpClientModule} from "@angular/common/http";
+import {MessageService} from "primeng/api";
 
 @NgModule({
   declarations: [
@@ -13,7 +14,8 @@ import {HttpClientModule} from "@angular/common/http";
     AppRoutingModule,
     HttpClientModule,
   ],
-  providers: [],
+  providers: [
+  MessageService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

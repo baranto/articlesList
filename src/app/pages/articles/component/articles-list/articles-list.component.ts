@@ -1,50 +1,56 @@
-import { Component, OnInit } from '@angular/core';
-import {PrimeNGConfig, SelectItem} from "primeng/api";
-import {Product} from "../../models/product";
+import {ChangeDetectorRef, Component, OnDestroy, OnInit} from '@angular/core';
+import {MessageService, PrimeNGConfig, SelectItem} from "primeng/api";
 import {PagesFacade} from "../../../pages.facade";
 import {Router} from "@angular/router";
+import {catchError, Subscription, tap, throwError} from "rxjs";
+import {getConfigErrorToast} from "../../../../core/helper/config-toast";
+import {Product} from "../../models/product";
 
 @Component({
   selector: 'app-articles-list',
   templateUrl: './articles-list.component.html',
   styleUrls: ['./articles-list.component.css']
 })
-export class ArticlesListComponent implements OnInit {
+export class ArticlesListComponent implements OnInit, OnDestroy {
   public products: Array<Product> = [];
-
   public sortOptions: Array<SelectItem> = [];
 
   public sortOrder: number = 0;
 
   public sortField: string = '';
 
+  private subscriptions: Subscription[] = [];
+
   constructor(
     private pagesFacade: PagesFacade,
     private primengConfig: PrimeNGConfig,
+    public messageService: MessageService,
+    private cdr: ChangeDetectorRef,
     private router: Router) { }
 
-  ngOnInit() {
-    this.pagesFacade.getProducts().then(data => this.products = data);
+  ngOnDestroy(): void {
+    this.subscriptions.forEach((sb) => sb.unsubscribe());
+  }
 
+  ngOnInit() {
+    const sb = this.pagesFacade.getProducts().pipe(
+      tap(data => this.products = data),
+      catchError(err => {
+        console.error(err);
+        this.messageService.clear();
+        this.messageService.add(getConfigErrorToast('Error'));
+        this.cdr.detectChanges();
+        return throwError(err);
+      }),
+    ).subscribe();
+
+    this.subscriptions.push(sb);
     this.sortOptions = [
       {label: 'Price High to Low', value: '!price'},
       {label: 'Price Low to High', value: 'price'}
     ];
 
     this.primengConfig.ripple = true;
-  }
-
-  onSortChange(event: any) {
-    let value = event.value;
-
-    if (value.indexOf('!') === 0) {
-      this.sortOrder = -1;
-      this.sortField = value.substring(1, value.length);
-    }
-    else {
-      this.sortOrder = 1;
-      this.sortField = value;
-    }
   }
 
   public openDetail() {
