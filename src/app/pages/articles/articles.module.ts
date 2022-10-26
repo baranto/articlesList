@@ -9,12 +9,14 @@ import {DataViewModule} from "primeng/dataview";
 import {DropdownModule} from "primeng/dropdown";
 import {RatingModule} from "primeng/rating";
 import {ButtonModule} from "primeng/button";
+import { ProductDataComponent } from './component/product-data/product-data.component';
 
 @NgModule({
   declarations: [
     ArticlesListComponent,
     ArticleDetailComponent,
-    ArticleComponent
+    ArticleComponent,
+    ProductDataComponent
   ],
   imports: [
     CommonModule,
