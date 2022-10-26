@@ -1,34 +1,59 @@
+<div class="card-wrapper">
 <mat-card>
-  <!--  <ngb-accordion [closeOthers]="false" activeIds="static-3">-->
-  <!--    <ngb-panel id="static-3">-->
-  <div>
-    <img src="./assets/media/icons/duotune/democom/corpo/icn_braccia.svg">
-    <span>Braccia e Polsi</span>
-  </div>
-  <div>
-    <div class="outer">
-      <div class="inner">
-        <span class="left"><b>Tipologia</b></span>
-        <span class="right"><b>Cm</b></span>
-      </div>
-    </div>
-    <div class="outer">
-      <div class="inner">
-        <span class="left">Spalle Larghezza</span>
-        <span class="right" >LarghezzaSpalle</span>
-      </div>
-    </div>
-    <br>
-    <div class="outer">
-      <div class="inner">
-        <span class="left">Bicipite Sinistro Larghezza</span>
-        <span class="right">LarghezzaBicipiteSinistro</span>
-      </div>
-    </div>
-    <br>
+  <mat-card-header class="card-title">
+    <mat-card-title><b>{{product?.title?.en}}</b></mat-card-title>
+  </mat-card-header>
 
+  <mat-card-content>
     <br>
-  </div>
-  <!--    </ngb-panel>-->
-  <!--  </ngb-accordion>-->
+    <div>DIMENSIONI</div>
+    <br>
+    <div class="outer">
+      <div class="inner">
+        <span class="left">Dimensione A </span>
+        <span class="right"><b> {{product.defaultDimensionA}}</b></span>
+      </div>
+    </div>
+    <div class="outer">
+      <div class="inner">
+        <span class="left">Dimensione B</span>
+        <span class="right"><b>{{product.defaultDimensionB}}</b></span>
+      </div>
+    </div>
+    <div class="outer">
+      <div class="inner">
+        <span class="left">Dimensione H</span>
+        <span class="right"><b>{{product.defaultDimensionH}}</b></span>
+      </div>
+    </div>
+      <br>
+      <br>
+      <div>CATEGORIES</div>
+      <br>
+      <div *ngFor="let category of product.categories" class="outer">
+        <div class="inner">
+          <span class="left">{{category.title.en}} </span>
+          <span class="right"><b> {{category.description.en}}</b></span>
+        </div>
+      </div>
+    <br>
+    <br>
+    <div>DIMENSION BOUNDERIES</div>
+    <br>
+    <div *ngFor="let boundary of product.dimensionBoundaries" class="outer">
+      <div class="inner">
+        <span class="left">Width  </span>
+        <span class="right"><b> {{boundary?.minA}}</b></span>
+      </div>
+      <div class="inner">
+        <span class="left">Depth  </span>
+        <span class="right"><b> {{boundary?.minB}}</b></span>
+      </div>
+      <div class="inner">
+        <span class="left">Height  </span>
+        <span class="right"><b> {{boundary?.minH}}</b></span>
+      </div>
+    </div>
+  </mat-card-content>
 </mat-card>
+</div>

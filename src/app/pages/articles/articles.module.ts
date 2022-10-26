@@ -10,6 +10,8 @@ import {DropdownModule} from "primeng/dropdown";
 import {RatingModule} from "primeng/rating";
 import {ButtonModule} from "primeng/button";
 import { ProductDataComponent } from './component/product-data/product-data.component';
+import {MatCardModule} from "@angular/material/card";
+import {MatDividerModule} from "@angular/material/divider";
 
 @NgModule({
   declarations: [
@@ -18,14 +20,16 @@ import { ProductDataComponent } from './component/product-data/product-data.comp
     ArticleComponent,
     ProductDataComponent
   ],
-  imports: [
-    CommonModule,
-    ArticlesRoutingModule,
-    FormsModule,
-    DataViewModule,
-    DropdownModule,
-    RatingModule,
-    ButtonModule
-  ]
+    imports: [
+        CommonModule,
+        ArticlesRoutingModule,
+        FormsModule,
+        DataViewModule,
+        DropdownModule,
+        RatingModule,
+        ButtonModule,
+        MatCardModule,
+        MatDividerModule
+    ]
 })
 export class ArticlesModule { }

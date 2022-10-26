@@ -5,11 +5,11 @@ import {Router} from "@angular/router";
 import {catchError, Subscription, tap, throwError} from "rxjs";
 import {getConfigErrorToast} from "../../../../core/helper/config-toast";
 import {Product} from "../../models/product";
+import {ICustomHttpResponse} from "../../../../core/models/ICustomHttpResponse";
 
 @Component({
   selector: 'app-articles-list',
-  templateUrl: './articles-list.component.html',
-  styleUrls: ['./articles-list.component.css']
+  templateUrl: './articles-list.component.html'
 })
 export class ArticlesListComponent implements OnInit, OnDestroy {
   public products: Array<Product> = [];
@@ -34,7 +34,7 @@ export class ArticlesListComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     const sb = this.pagesFacade.getProducts().pipe(
-      tap(data => this.products = data),
+      tap((data: ICustomHttpResponse<Array<Product>>) => this.products = data?.body),
       catchError(err => {
         console.error(err);
         this.messageService.clear();
@@ -53,9 +53,9 @@ export class ArticlesListComponent implements OnInit, OnDestroy {
     this.primengConfig.ripple = true;
   }
 
-  public openDetail() {
+  public openDetail(product: Product) {
     console.log('clicked');
-    this.router.navigate(['articles/detail', 1233234]);
+    this.router.navigate(['articles/detail', product.code]);
   }
 
 }

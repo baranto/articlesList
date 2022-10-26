@@ -83,39 +83,39 @@
   }
 
   export class Product {
-    deleted: boolean;
-    availabilityCheck: boolean;
-    custom: boolean;
-    active: boolean;
-    categories: Category[];
-    mockupImages: any[];
-    _id: string;
-    code: string;
-    model: string;
-    variant: string;
-    properties: Properties;
-    url: ILanguage;
-    mockup: string;
-    dieline: string;
-    title: ILanguage;
-    description: ILanguage;
-    variantName: ILanguage;
-    pictures: any[];
-    previews: string[];
-    __v: number;
-    metaDescription: ILanguage;
-    metaTitle: ILanguage;
-    createdAt: Date;
-    dimensionBoundaries: DimensionBoundary[];
-    updatedAt: Date;
-    defaultDimensionA: number;
-    defaultDimensionB: number;
-    defaultDimensionH: number;
-    updated_by: UpdatedBy;
-    id: string;
-    modelName: ILanguage;
+    deleted?: boolean;
+    availabilityCheck?: boolean;
+    custom?: boolean;
+    active?: boolean;
+    categories?: Category[];
+    mockupImages?: any[];
+    _id?: string;
+    code?: string;
+    model?: string;
+    variant?: string;
+    properties?: Properties;
+    url?: ILanguage;
+    mockup?: string;
+    dieline?: string;
+    title?: ILanguage;
+    description?: ILanguage;
+    variantName?: ILanguage;
+    pictures?: any[];
+    previews?: string[];
+    __v?: number;
+    metaDescription?: ILanguage;
+    metaTitle?: ILanguage;
+    createdAt?: Date;
+    dimensionBoundaries?: DimensionBoundary[];
+    updatedAt?: Date;
+    defaultDimensionA?: number;
+    defaultDimensionB?: number;
+    defaultDimensionH?: number;
+    updated_by?: UpdatedBy;
+    id?: string;
+    modelName?: ILanguage;
 
-    constructor(_id: string, deleted: boolean, availabilityCheck: boolean, custom: boolean, active: boolean, categories: Category[], mockupImages: any[], code: string, model: string, variant: string, properties: Properties, url: ILanguage, mockup: string, dieline: string, title: ILanguage, description: ILanguage, variantName: ILanguage, pictures: any[], previews: string[], _v: number, metaDescription: ILanguage, metaTitle: ILanguage, createdAt: Date, dimensionBoundaries: DimensionBoundary[], updatedAt: Date, defaultDimensionA: number, defaultDimensionB: number, defaultDimensionH: number, updated_by: UpdatedBy, id: string, modelName: ILanguage) {
+    constructor(_id?: string, deleted?: boolean, availabilityCheck?: boolean, custom?: boolean, active?: boolean, categories?: Category[], mockupImages?: any[], code?: string, model?: string, variant?: string, properties?: Properties, url?: ILanguage, mockup?: string, dieline?: string, title?: ILanguage, description?: ILanguage, variantName?: ILanguage, pictures?: any[], previews?: string[], _v?: number, metaDescription?: ILanguage, metaTitle?: ILanguage, createdAt?: Date, dimensionBoundaries?: DimensionBoundary[], updatedAt?: Date, defaultDimensionA?: number, defaultDimensionB?: number, defaultDimensionH?: number, updated_by?: UpdatedBy, id?: string, modelName?: ILanguage) {
       this._id = _id;
       this.deleted = deleted;
       this.availabilityCheck = availabilityCheck;
