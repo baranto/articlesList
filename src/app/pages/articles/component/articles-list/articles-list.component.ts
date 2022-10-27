@@ -68,7 +68,12 @@ export class ArticlesListComponent implements OnInit, OnDestroy {
     this.router.navigate(['articles/detail', product?.code]);
   }
 
+  public selectItemChange() {
+    console.log(this.selectedCategory);
+  }
+
   ngOnDestroy(): void {
     this.subscriptions.forEach((sb) => sb.unsubscribe());
   }
+
 }

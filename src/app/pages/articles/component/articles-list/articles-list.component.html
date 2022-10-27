@@ -4,26 +4,13 @@
       <div class="flex flex-column md:flex-row md:justify-content-between">
         <span class="p-input-icon-left mb-2 md:mb-0">
           <ng-select [items]="categories"
+                     bindValue="id"
                      bindLabel="name"
                      placeholder="Select category"
                      [(ngModel)]="selectedCategory"
+                     (ngModelChange)="selectItemChange()"
                      [searchable]="false"> </ng-select>
               </span>
-      </div>
-    </ng-template>
-    <ng-template let-product pTemplate="listItem">
-      <div class="p-col-12">
-        <div class="product-list-item">
-          <div class="product-list-detail">
-            <div class="product-name">{{product?.modelName?.en}}</div>
-            <div class="product-description">{{product?.variantName?.en}}</div>
-            <i class="pi pi-tag product-category-icon"></i><span class="product-category">{{product.category}}</span>
-          </div>
-          <div class="product-list-action">
-            <span class="product-price">${{product.price}}</span>
-            <span [class]="'product-badge status-' + product.inventoryStatus.toLowerCase()">{{product.inventoryStatus}}</span>
-          </div>
-        </div>
       </div>
     </ng-template>
     <ng-template let-product pTemplate="gridItem">
@@ -31,12 +18,11 @@
         <div class="product-grid-item card" (click)="openDetail(product)">
           <div class="product-grid-item-top">
             <div>
-              <i class="pi pi-tag product-category-icon"></i>
-              <span class="product-category">{{product.category}}</span>
+              <i class="pi pi-tag product-category-icon mr-2"></i>
+              <span><b>{{product?.modelName?.en}}</b></span>
             </div>
           </div>
           <div class="product-grid-item-content">
-            <div class="product-name">{{product?.modelName?.en}}</div>
             <div class="product-description">{{product?.variantName?.en}}</div>
           </div>
           <div class="product-grid-item-bottom">
