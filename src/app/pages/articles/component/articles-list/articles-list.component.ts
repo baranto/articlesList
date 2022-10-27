@@ -1,4 +1,4 @@
-import {ChangeDetectorRef, Component, OnDestroy, OnInit} from '@angular/core';
+import {ChangeDetectorRef, Component, OnDestroy, OnInit, ViewChild} from '@angular/core';
 import {MessageService, PrimeNGConfig} from "primeng/api";
 import {PagesFacade} from "../../../pages.facade";
 import {Router} from "@angular/router";
@@ -8,12 +8,15 @@ import {Product} from "../../models/product";
 import {ICustomHttpResponse} from "../../../../core/models/ICustomHttpResponse";
 import {Category} from "../../models/category";
 import {ICategory} from "../../models/ICategory";
+import {first} from "lodash";
+import {ICustomParams} from "../../../../core/models/ICustomParams";
 
 @Component({
   selector: 'app-articles-list',
   templateUrl: './articles-list.component.html'
 })
 export class ArticlesListComponent implements OnInit, OnDestroy {
+
   public categories: Array<ICategory> = [];
   public selectedCategory: any;
   public products: Array<Product> = [];
@@ -28,10 +31,16 @@ export class ArticlesListComponent implements OnInit, OnDestroy {
     private router: Router) { }
 
   ngOnInit() {
-    const sb = this.pagesFacade.getProducts().pipe(
+    this.getAllProduct();
+    this.primengConfig.ripple = true;
+  }
+
+  public getAllProduct(customParams: ICustomParams = {}) {
+    const sb = this.pagesFacade.getProducts(customParams).pipe(
       tap((data: ICustomHttpResponse<Array<Product>>) => {
         this.products = data?.body;
         this.getCategories();
+        this.cdr.detectChanges();
       }),
       catchError(err => {
         console.error(err);
@@ -43,14 +52,13 @@ export class ArticlesListComponent implements OnInit, OnDestroy {
     ).subscribe();
 
     this.subscriptions.push(sb);
-    this.primengConfig.ripple = true;
   }
 
   public getCategories(): void {
     const sb = this.pagesFacade.getCategories().pipe(
       tap((categories: Array<Category>) => {
         this.categories = categories.map(category => {
-          return {id: category?.id, name: category?.name?.en ?? ''};
+          return {code: category?.code, name: category?.name?.en ?? ''};
         });
       }),
       catchError(err => {
@@ -69,11 +77,16 @@ export class ArticlesListComponent implements OnInit, OnDestroy {
   }
 
   public selectItemChange() {
-    console.log(this.selectedCategory);
+    if (!this.selectedCategory) {
+      return this.getAllProduct();
+    }
+    const customParams: ICustomParams = {};
+    customParams["categories.code"] = this.selectedCategory;
+    this.getAllProduct(customParams);
+    this.cdr.detectChanges();
   }
 
   ngOnDestroy(): void {
     this.subscriptions.forEach((sb) => sb.unsubscribe());
   }
-
 }
