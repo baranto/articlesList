@@ -4,52 +4,22 @@ import {Observable} from "rxjs";
 import {Product} from "../models/product";
 import {ICustomParams} from "../../../core/models/ICustomParams";
 import {createHttpParams} from "../../../core/helper/createHttpParams";
+import {Category} from "../models/category";
 
 @Injectable({
   providedIn: 'root'
 })
 export class ProductService {
 
-  status: string[] = ['OUTOFSTOCK', 'INSTOCK', 'LOWSTOCK'];
-
-  productNames: string[] = [
-    "Bamboo Watch",
-    "Black Watch",
-    "Blue Band",
-    "Blue T-Shirt",
-    "Bracelet",
-    "Brown Purse",
-    "Chakra Bracelet",
-    "Galaxy Earrings",
-    "Game Controller",
-    "Gaming Set",
-    "Gold Phone Case",
-    "Green Earbuds",
-    "Green T-Shirt",
-    "Grey T-Shirt",
-    "Headphones",
-    "Light Green T-Shirt",
-    "Lime Band",
-    "Mini Speakers",
-    "Painted Phone Case",
-    "Pink Band",
-    "Pink Purse",
-    "Purple Band",
-    "Purple Gemstone Necklace",
-    "Purple T-Shirt",
-    "Shoes",
-    "Sneakers",
-    "Teal T-Shirt",
-    "Yellow Earbuds",
-    "Yoga Mat",
-    "Yoga Set",
-  ];
-
   constructor(private http: HttpClient) { }
 
-  getProducts(customParams: ICustomParams = {}): Observable<any>{
+  public getProducts(customParams: ICustomParams = {}): Observable<any>{
     const params = createHttpParams(customParams);
     return this.http.get<Array<Product>>('https://strapi.pack.ly/articles',{params, observe: 'response'});
   }
 
-}
+  public getCategories(): Observable<Array<Category>> {
+    return this.http.get<Array<Category>>('https://strapi.pack.ly/categories');
+  }
+
+  }

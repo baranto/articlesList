@@ -1,23 +1,5 @@
-
-  export interface ILanguage {
-    en?: string;
-    it?: string;
-    fr?: string;
-    de?: string;
-  }
-
-  export interface Category {
-    _id: string;
-    code: string;
-    name: ILanguage;
-    url: ILanguage;
-    title: ILanguage;
-    description: ILanguage;
-    __v: number;
-    updatedAt: Date;
-    updated_by: string;
-    id: string;
-  }
+import {ILanguage} from "./ILanguage";
+import {Category} from "./category";
 
   export interface MaxValues {
     s: number;

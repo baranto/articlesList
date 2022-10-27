@@ -12,6 +12,7 @@ import {ButtonModule} from "primeng/button";
 import { ProductDataComponent } from './component/product-data/product-data.component';
 import {MatCardModule} from "@angular/material/card";
 import {MatDividerModule} from "@angular/material/divider";
+import {NgSelectModule} from "@ng-select/ng-select";
 
 @NgModule({
   declarations: [
@@ -29,7 +30,8 @@ import {MatDividerModule} from "@angular/material/divider";
         RatingModule,
         ButtonModule,
         MatCardModule,
-        MatDividerModule
+        MatDividerModule,
+        NgSelectModule
     ]
 })
 export class ArticlesModule { }

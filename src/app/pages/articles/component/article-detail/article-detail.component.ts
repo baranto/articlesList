@@ -1,7 +1,7 @@
-import {ChangeDetectorRef, Component, OnInit} from '@angular/core';
+import {ChangeDetectorRef, Component, OnDestroy, OnInit} from '@angular/core';
 import {ActivatedRoute} from '@angular/router';
 import {PagesFacade} from '../../../pages.facade';
-import {catchError, tap, throwError} from 'rxjs';
+import {catchError, Subscription, tap, throwError} from 'rxjs';
 import {getConfigErrorToast} from '../../../../core/helper/config-toast';
 import {MessageService} from 'primeng/api';
 import {Product} from '../../models/product';
@@ -13,8 +13,10 @@ import {ICustomHttpResponse} from "../../../../core/models/ICustomHttpResponse";
   selector: 'app-article-detail',
   templateUrl: './article-detail.component.html'
 })
-export class ArticleDetailComponent implements OnInit {
+export class ArticleDetailComponent implements OnInit, OnDestroy {
   public product: Product = new Product();
+
+  private subscriptions: Subscription[] = [];
 
   constructor(private route: ActivatedRoute,
               private pagesFacade: PagesFacade,
@@ -25,7 +27,7 @@ export class ArticleDetailComponent implements OnInit {
     const id = this.route.snapshot.paramMap.get('id');
     const customParams: ICustomParams = {};
     customParams.code = id ? id : '';
-    this.pagesFacade.getProducts(customParams).pipe(
+    const sb = this.pagesFacade.getProducts(customParams).pipe(
       tap((result: ICustomHttpResponse<Array<Product>>) => {
         if (!isEmpty(result)) {
           this.product = first(result.body) as Product;
@@ -40,6 +42,11 @@ export class ArticleDetailComponent implements OnInit {
       }))
       .subscribe();
 
+    this.subscriptions.push(sb);
+  }
+
+  ngOnDestroy(): void {
+    this.subscriptions.forEach((sb) => sb.unsubscribe());
   }
 
 }
