@@ -6,27 +6,26 @@
 
   <mat-card-content>
     <br>
-    <div>DIMENSIONI</div>
+    <div>DIMENSIONS</div>
     <br>
     <div class="outer">
       <div class="inner">
-        <span class="left">Dimensione A </span>
+        <span class="left">Dimension A </span>
         <span class="right"><b> {{product.defaultDimensionA}}</b></span>
       </div>
     </div>
     <div class="outer">
       <div class="inner">
-        <span class="left">Dimensione B</span>
+        <span class="left">Dimension B</span>
         <span class="right"><b>{{product.defaultDimensionB}}</b></span>
       </div>
     </div>
     <div class="outer">
       <div class="inner">
-        <span class="left">Dimensione H</span>
+        <span class="left">Dimension H</span>
         <span class="right"><b>{{product.defaultDimensionH}}</b></span>
       </div>
     </div>
-      <br>
       <br>
       <div>CATEGORIES</div>
       <br>
@@ -37,20 +36,18 @@
         </div>
       </div>
     <br>
-    <br>
     <div>DIMENSION BOUNDERIES</div>
-    <br>
     <div *ngFor="let boundary of product.dimensionBoundaries" class="outer">
       <div class="inner">
-        <span class="left">Width  </span>
+        <span class="left">Width</span>
         <span class="right"><b> {{boundary?.minA}}</b></span>
       </div>
       <div class="inner">
-        <span class="left">Depth  </span>
+        <span class="left">Depth</span>
         <span class="right"><b> {{boundary?.minB}}</b></span>
       </div>
       <div class="inner">
-        <span class="left">Height  </span>
+        <span class="left">Height</span>
         <span class="right"><b> {{boundary?.minH}}</b></span>
       </div>
     </div>
